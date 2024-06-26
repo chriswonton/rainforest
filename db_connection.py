@@ -12,11 +12,3 @@ def get_connection():
         password=os.getenv('DB_PASSWORD'),
         database=os.getenv('DB_NAME')
     )
-
-# if __name__ == '__main__':
-#     try:
-#         connection = get_connection()
-#         print("Connection to the database was successful!")
-#         connection.close()
-#     except Exception as e:
-#         print(f"An error occurred: {e}")
