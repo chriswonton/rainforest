@@ -1,4 +1,5 @@
 from flask import *
+import bcrypt
 import db_operations as db
 
 app = Flask(__name__)
@@ -8,21 +9,27 @@ user = None
 def main():
     return render_template('home.html', user = user)
 
+@app.route('/', methods=['POST'])
+def logout():
+    global user
+    user = None
+    return jsonify({"message": "Logged out successfully"}), 201
+
 @app.route('/login')
 def login():
     return render_template('auth/login.html')
 
 @app.route('/login', methods=['POST'])
-def validate():
+def validate_login():
     data = request.get_json()
     username = data['username']
     password = data['password']
     account = db.select_account(username)
 
-    if account is None:
+    if (account == None):
         return jsonify({"error": "Account not found"}), 404
     
-    if (password != account[2]):
+    if bcrypt.checkpw(password.encode('utf-8'), account[2].encode('utf-8')):
         return jsonify({"error": "Invalid password"}), 401
     
     global user
@@ -32,6 +39,24 @@ def validate():
 @app.route('/signup')
 def signup():
     return render_template('auth/signup.html')
+
+@app.route('/signup', methods=['POST'])
+def validate_signup():
+    data = request.get_json()
+    username = data['username']
+    email = data['email']
+    password = data['password']
+    password2 = data['password2']
+
+    if (password != password2):
+        return jsonify({"error": "Password 1 does not match Password 2"}), 401
+
+    salt = bcrypt.gensalt()
+    password = bcrypt.hashpw(password.encode('utf-8'), salt)
+    db.insert_account(username, password, email)
+    global user
+    user = username
+    return jsonify({"message": "Signed up successfully"}), 201
 
 @app.route('/account', methods=['POST'])
 def add_account():

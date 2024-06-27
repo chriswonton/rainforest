@@ -1,17 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
 <meta charset="UTF-8">
-<title>Login</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rainforest Sign-Up</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<style>
-</style>
+<link rel="stylesheet" href="../static/auth/main.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="../../static/auth/signup.js"></script>
+</head>
 <body>
 
-<div class="">
- <h1>This is the Sign Up</h1>
- <p>This is a paragraph.</p>
- <p>This is another paragraph.</p>
+<div class="container">
+ <h1>Sign Up to Rainforest!</h1>
+ <div>
+    <div class="form-group">
+      <label for="username">Username:</label>
+      <br>
+      <input type="text" id="username" name="username">
+      <br>
+      <label for="email">Email:</label>
+      <br>
+      <input type="text" id="email" name="email">
+      <br>
+      <label for="password">Password:</label>
+      <br>
+      <input type="password" id="password" name="password">
+      <br>
+      <label for="password2">Confirm Password:</label>
+      <br>
+      <input type="password" id="password2" name="password2">
+      <br>
+      <br>
+      <button class="btn btn-default" onclick="signup()">Sign-Up</button>
+    </div>
+ </div>
+ <p>Already have an existing account?</p>
+ <a class="btn btn-primary" href="/login">Log In</a>
+ <br>
+ <br>
+ <a href="/">Back to Home</a>
 </div>
 
 </body>
