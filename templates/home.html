@@ -16,7 +16,13 @@
  <a class="btn btn-warning" href="/signup">Sign-Up</a>
  {% else %}
  <h1>Welcome to Rainforest, {{user}}!</h1>
- <a class="btn btn-default" onclick="logout()">Log Out</a>
+ <a class="large-link" href="/products">Products Page</a>
+ <br>
+ <br>
+ <a class="btn btn-danger" onclick="logout()">Log Out</a>
+ {% if admin == 1 %}
+ <a class="btn btn-warning" href="/admin">Admin Console</a>
+ {% endif %}
  {% endif %}
 </div>
 

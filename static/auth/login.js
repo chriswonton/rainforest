@@ -10,10 +10,12 @@ function login() {
             "password": password,
         }),
         success: function(response) {
+            alert(response.message);
             document.location.href = "/"
         },
-        error: function(error) {
-            console.log(error);
+        error: function(xhr, status, error) {
+            let errorMessage = JSON.parse(xhr.responseText).error;
+            alert("Error: " + errorMessage);
         }
     });
 }

@@ -53,7 +53,7 @@ def insert_order(account_id, total):
 #     finally:
 #         connection.close()
 
-def select_account(username):
+def select_account_username(username):
     connection = get_connection()
     try:
         with connection.cursor() as cursor:
@@ -61,5 +61,27 @@ def select_account(username):
             cursor.execute(sql, (username))
             result = cursor.fetchone()
             return result
+    finally:
+        connection.close()
+
+def select_account_email(email):
+    connection = get_connection()
+    try:
+        with connection.cursor() as cursor:
+            sql = "SELECT * FROM Account WHERE email = %s"
+            cursor.execute(sql, (email))
+            result = cursor.fetchone()
+            return result
+    finally:
+        connection.close()
+
+def select_all_accounts():
+    connection = get_connection()
+    try:
+        with connection.cursor() as cursor:
+            sql = "SELECT * FROM Account"
+            cursor.execute(sql)
+            results = cursor.fetchall()
+            return results
     finally:
         connection.close()
