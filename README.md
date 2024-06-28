@@ -1,5 +1,5 @@
 # Rainforest
-This project is an application mimicking the online ordering service Amazon.como provides.
+This project is an application mimicking the online ordering service Amazon.com provides.
 
 ## Running the App:
 - Create a virtual Python environment using `python3 -m venv venv`
