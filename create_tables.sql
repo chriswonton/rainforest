@@ -11,12 +11,14 @@ CREATE TABLE Product (
     name VARCHAR(100) NOT NULL,
     manufacturer VARCHAR(100) NOT NULL,
     description TEXT,
+    image VARCHAR(100),
+    category VARCHAR(50),
     price DECIMAL(10, 2) NOT NULL,
     inventory_stock INT DEFAULT 0,
     creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE Order (
+CREATE TABLE `Order` (
     order_id INT AUTO_INCREMENT PRIMARY KEY,
     account_id INT,
     order_date DATETIME DEFAULT CURRENT_TIMESTAMP,

@@ -78,40 +78,29 @@ def validate_signup():
 def admin():
     return render_template('/admin.html')
 
+@app.route('/admin', methods=['POST'])
+def add_product():
+    data = request.get_json()
+    name = data['name']
+    manufacturer = data['manufacturer']
+    description = data['description']
+    image = data['image']
+    category = data['category']
+    price = data['price']
+    stock = data['stock']
+
+    db.insert_product(name, manufacturer, description, image, category, price, stock)
+    return jsonify({"message": "Product added successfully"}), 201
+
 @app.route('/products')
 def products():
-    return render_template('/products.html')
+    products = db.select_all_products()
+    return render_template('/products.html', products = products)
 
-@app.route('/account', methods=['POST'])
-def add_account():
-    data = request.json
-    db.insert_account(data['username'], data['password'], data['email'])
-    return jsonify({"message": "Account created successfully"}), 201
-
-@app.route('/product', methods=['POST'])
-def add_product():
-    data = request.json
-    db.insert_product(data['name'], data['description'], data['price'], data['stock'])
-    return jsonify({"message": "Product created successfully"}), 201
-
-# @app.route('/order', methods=['POST'])
-# def add_order():
-#     data = request.json
-#     order_id = db.insert_order(data['account_id'], data['total'])
-#     return jsonify({"order_id": order_id, "message": "Order created successfully"}), 201
-
-# @app.route('/order_product', methods=['POST'])
-# def add_order_product():
-#     data = request.json
-#     db.insert_order_product(data['order_id'], data['product_id'], data['quantity'])
-#     return jsonify({"message": "Order-Product entry created successfully"}), 201
-
-# @app.route('/shipment', methods=['POST'])
-# def add_shipment():
-#     data = request.json
-#     db.insert_shipment(data['order_id'], data['delivery_date'], data['status'])
-#     return jsonify({"message": "Shipment created successfully"}), 201
-
+@app.route('/products/<int:product_id>')
+def product_page(product_id):
+    product = db.select_product_id(product_id)
+    return render_template('/product.html', product = product)
 
 def encrypt_password(password):
     password_bytes = password.encode('utf-8')
