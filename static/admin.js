@@ -6,6 +6,7 @@ function add_product() {
     let category = document.getElementById("category").value;
     let price = document.getElementById("price").value;
     let stock = document.getElementById("stock").value;
+    
     $.ajax({
         url: "/admin",
         type: "POST",
