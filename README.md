@@ -6,4 +6,3 @@ This project is an application mimicking the online ordering service Amazon.com 
 - Activate the virtual environment using `source venv/bin/activate`
 - Install python-dotenv within the virtual environment using `pip install python-dotenv`, as well as any other necessary libraries
 - Run the app with `python app.py`
-- temp
