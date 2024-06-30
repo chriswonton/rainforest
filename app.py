@@ -102,6 +102,48 @@ def product_page(product_id):
     product = db.select_product_id(product_id)
     return render_template('/product.html', product = product)
 
+@app.route('/products/<int:product_id>', methods=['POST'])
+def add_order(product_id):
+    account = db.select_account_username(user)
+    account_id = account[0]
+    order_id = db.select_order_cart(account_id)
+    if order_id == None:
+        order_id = db.insert_order(account_id)
+    
+    data = request.get_json()
+    quantity = data['quantity']
+
+    db.insert_order_item(order_id, product_id, quantity)
+    return jsonify({"message": "Product added to shopping cart"}), 201
+
+@app.route('/shopping_cart')
+def shopping_cart():
+    account = db.select_account_username(user)
+    account_id = account[0]
+    order_id = db.select_order_cart(account_id)
+    if order_id == None:
+        order_id = db.insert_order(account_id)
+    
+    order_items = db.select_order_item_id(order_id)
+    total_price = 0
+    for product in order_items:
+        total_price += (product[5] * product[2])
+
+    return render_template('/shopping_cart.html', order_items = order_items, total_price = total_price)
+
+@app.route('/shopping_cart', methods=['POST'])
+def buy():
+    account = db.select_account_username(user)
+    account_id = account[0]
+    order_id = db.select_order_cart(account_id)
+    if order_id == None:
+        order_id = db.insert_order(account_id)
+    
+    db.update_product_stock(order_id)
+    db.update_order_date(order_id)
+    
+    return jsonify({"message": "Bought items"}), 201
+
 def encrypt_password(password):
     password_bytes = password.encode('utf-8')
     hash_object = hashlib.sha256()

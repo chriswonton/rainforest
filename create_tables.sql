@@ -21,7 +21,7 @@ CREATE TABLE Product (
 CREATE TABLE `Order` (
     order_id INT AUTO_INCREMENT PRIMARY KEY,
     account_id INT,
-    order_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    order_date DATETIME,
     shipment_date DATETIME,
     FOREIGN KEY (account_id) REFERENCES Account(account_id)
 );

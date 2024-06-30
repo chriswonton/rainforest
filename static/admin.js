@@ -22,7 +22,7 @@ function add_product() {
         }),
         success: function(response) {
             alert(response.message);
-            document.location.href = "/admin"
+            document.location.href = "/admin";
         },
         error: function(error) {
             console.log(error);

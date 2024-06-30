@@ -32,7 +32,7 @@ table.table_products {
   border-spacing: 0 5px;
 }
 
-table tr {
+table tr.table_product {
   cursor: pointer;
 }
 

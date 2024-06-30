@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <meta charset="UTF-8">
-<title>Rainforest Products</title>
+<title>Shopping Cart</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link rel="stylesheet" href="../static/main.css">
@@ -13,33 +13,46 @@
             return false
         })
     })
+    function buy() {
+        $.ajax({
+            url: "/shopping_cart",
+            type: "POST",
+            contentType: "application/json",
+            success: function(response) {
+                alert(response.message);
+                document.location.href = "/products"
+            },
+            error: function(error) {
+                console.log(error)
+            }
+        })
+    }
 </script>
 <body>
 
 <div class="container">
- <h1>Rainforest Products</h1>
+ <h1>Your Shopping Cart</h1>
  <table class="table_products">
     <tr>
         <td><h4>Image</h4></td>
         <td><h4>Product Name</h4></td>
-        <td><h4>Manufacturer</h4></td>
-        <td><h4>Description</h4></td>
+        <td><h4>Quantity</h4></td>
         <td><h4>Price</h4></td>
-        <td><h4>Stock</h4></td>
     </tr>
-    {% for product in products %}
-    <tr class="table_product" href="/products/{{product[0]}}">
+    {% for product in order_items %}
+    <tr class="table_product" href="/products/{{product[1]}}">
         <td><img class="product" src="{{product[4]}}"></td>
-        <td>{{product[1]}}</td>
-        <td>{{product[2]}}</td>
         <td>{{product[3]}}</td>
-        <td>${{product[6]}}</td>
-        <td>{{product[7]}}</td>
-    </tr>
+        <td>{{product[2]}}</td>
+        <td>${{product[5] * product[2]}}</td>
     {% endfor %}
+    <tr>
+        <td colspan="3"><h4>Total Price: ${{total_price}}</h4></td>
+        <td><button class="btn btn-success" onclick="buy()">Buy</button></td>
+    </tr>
  </table>
  <br>
- <a href="/">Back to Home</a>
+ <a href="/products">Back to Products</a>
 </div>
 
 </body>
