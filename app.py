@@ -92,6 +92,10 @@ def add_product():
     db.insert_product(name, manufacturer, description, image, category, price, stock)
     return jsonify({"message": "Product added successfully"}), 201
 
+@app.route('/admin/product_management')
+def product_managment():
+    return render_template('/product_management.html')
+
 @app.route('/products')
 def products():
     products = db.select_all_products()
