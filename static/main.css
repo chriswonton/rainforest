@@ -24,10 +24,6 @@ body.homepage {
   margin-bottom: 10px;
 }
 
-button:hover {
-  cursor: not-allowed;
-}
-
 a.large-link {
 font-size: 30px;
 }
@@ -43,9 +39,17 @@ table tr.table_product {
   cursor: pointer;
 }
 
+table tr.sold_out {
+  cursor: not-allowed;
+}
+
 td {
   background-color: rgb(200, 244, 206);
   padding: 10px;
+}
+
+td.sold_out {
+  background-color: grey;
 }
 
 tr:first-child td:first-child { border-top-left-radius: 10px; }

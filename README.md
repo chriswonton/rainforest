@@ -20,7 +20,6 @@ This project is an application mimicking the online ordering service Amazon.com 
 - error handling in Product Management
 ### Product Page:
 - remove items from Shopping Cart
-- display Sold Out on products with inventory count 0
 - sorting/searching for products
 - sorting using Category
 ### Profile Page:
