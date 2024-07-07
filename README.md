@@ -12,10 +12,10 @@ This project is an application mimicking the online ordering service Amazon.com 
 ### Admin Console:
 - Inventory Management
 - User Management:
- - view page of existing Users
- - manage which Users are Admin
- - view User order history
- - alter shipping dates
+  - view page of existing Users
+  - manage which Users are Admin
+  - view User order history
+  - alter shipping dates
 - remove products
 - error handling in Product Management
 ### Product Page:
