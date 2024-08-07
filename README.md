@@ -26,3 +26,11 @@ This project is an application mimicking the online ordering service Amazon.com 
 - view Order History and Shipping Dates
 - view total amount spent
 - cancel Orders
+
+
+** Look at SQLAlchemy - Object Relational Database
+#### Deployment on AWS as ECS service #######3
+
+** Create docker image from the code
+** Deploy docker image to ECR (Elastic Container Repository)
+** Use ECS (Elastic Container Service) use docker image above to servce the site
