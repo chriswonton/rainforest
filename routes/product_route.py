@@ -6,13 +6,15 @@ product_service = ProductService()
 
 @product_bp.route('/products')
 def products():
+    user = session.get('user')
     products = product_service.get_all_products()
-    return render_template('/products.html', products=products)
+    return render_template('product/products.html', user=user, products=products)
 
 @product_bp.route('/products/<int:product_id>')
 def product_page(product_id):
+    user = session.get('user')
     product = product_service.get_product_by_id(product_id)
-    return render_template('/product.html', product=product)
+    return render_template('product/product.html', user=user, product=product)
 
 @product_bp.route('/products/<int:product_id>', methods=['POST'])
 def add_order(product_id):
@@ -39,7 +41,7 @@ def shopping_cart():
     if error:
         return jsonify({"error": error}), 400
     
-    return render_template('/shopping_cart.html', order_items=order_items, total_price=total_price)
+    return render_template('product/shopping_cart.html', order_items=order_items, total_price=total_price)
 
 @product_bp.route('/shopping_cart', methods=['POST'])
 def buy():

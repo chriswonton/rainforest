@@ -10,20 +10,25 @@
 <body class="homepage">
 
 <div class="container">
- {% if user == None %}
- <h1>Welcome to Rainforest!</h1>
- <a class="btn btn-primary" href="/login">Log In</a>
- <a class="btn btn-warning" href="/signup">Sign-Up</a>
- {% else %}
- <h1>Welcome to Rainforest, {{user}}!</h1>
- <a class="large-link" href="/products">Products Page</a>
- <br>
- <br>
- <a class="btn btn-danger" onclick="logout()">Log Out</a>
- {% if admin == 1 %}
- <a class="btn btn-warning" href="/admin">Admin Console</a>
- {% endif %}
- {% endif %}
+    <div class="header">
+        <div>
+            {% if user == None %}
+            <a class="btn btn-primary" href="/login">Log In</a>
+            <a class="btn btn-warning" href="/signup">Sign-Up</a>
+            {% else %}
+            <a class="btn btn-danger" onclick="logout()">Log Out</a>
+            {% if admin == 1 %}
+            <a class="btn btn-warning" href="/admin">Admin Console</a>
+            {% endif %}
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="welcome-section">
+        <h1>Welcome to Rainforest{% if user %}, {{user}}{% endif %}!</h1>
+        <input type="text" class="form-control search-bar" placeholder="Search for products...">
+        <a class="large-link" href="/products">Products Page</a>
+    </div>
 </div>
 
 </body>
